@@ -21,75 +21,75 @@ if(!isset($_SESSION['userId'])){
 </head>
 <body>
 <header>
-<?php
-include "../includes/headerpart.php";
-?>
+    <?php
+    include "../includes/headerpart.php";
+    ?>
 </header>
     <div>
-        <h1 style="text-align:center">Security Officer Login</h1>
+        <h3 style="text-align:center">Security Control System</h3>
         <br>
+    </div>
 
-<form style="float:left;margin-left: 425px;" class="ON" action = "so.view.php" method="POST">
-        <h1>Mark Attendance</h1>
-        <input id="attended_id" type="text" name="att_id_no" placeholder="Enter ID" oninput="displaySearchedEmployee()">
-        <button class="btn btn-dark" type="submit" >Mark Attendence</button>
-        
-</form>
+    <div>
+        <form" class="ON" action = "so.view.php" method="POST">
+                <h4>Mark Attendance</h4>
+                <input id="attended_id" type="text" name="att_id_no" placeholder="Enter ID" oninput="displaySearchedEmployee()">
+                <button class="btn btn-dark" type="submit" >Mark Attendence</button>
+                
+        </form>
+    </div>
+
+    <div>
+        <form class ="OFF" action ="so.view.php" method ="POST">
+            <h4>Mark Departure</h4>
+            <input id="off_id" type="text" name="off_id_no" placeholder="Enter ID" oninput="displaySearchedEmployeeOff()">
+            <button class="btn btn-dark" type="submit"> Mark OFF </button>
+        </form>
+    </div>
 
 
-<form style="text-align:right;margin-right: 425px;" class ="OFF" action ="so.view.php" method ="POST">
-    <h1>Mark Departure</h1>
-    <input id="off_id" type="text" name="off_id_no" placeholder="Enter ID" oninput="displaySearchedEmployeeOff()">
-    <button class="btn btn-dark" type="submit"> Mark OFF </button>
-</form>
-</div>
-<br>
-<br>
-
-<div style="margin-left:700px;margin-right:700px" id="empDisplay" class="shadow p-3 mb-5 bg-white rounded">
-
-<div >
-<H3 style="text-align:center">Employee Details</H3>
-<p>Employee ID:<br>
-           First Name:<br>
-           Last Name:<br>
-           Address:<br>
-           Telephone No:<br>
-           Designation:<br>
-</div>
-
+<div style="margin-left:700px;margin-right:70px" id="empDisplay" class="shadow p-3 mb-5 bg-white rounded">
+    <div >
+    <H3 style="text-align:center">Employee Details</H3>
+    <p>Employee ID:<br>
+            First Name:<br>
+            Last Name:<br>
+            Address:<br>
+            Telephone No:<br>
+            Designation:<br>
+    </div>
 </div>
 
 
 <div style="margin-left:800px;margin-right:800px" class="alert alert-warning alert-dismissible fade show" id="display">
-
-
     
-<?php
+    <?php
 
-$factory=new ControllerFactory();
-$ctrl=$factory->getController("SO");
+    $factory=new ControllerFactory();
+    $ctrl=$factory->getController("SO");
 
 
-if (isset($_POST["att_id_no"])){
-    $time = date("h:i:s");
-    $date = date("Y-m-d");
-    $id=$_POST["att_id_no"];
-    $mark_on=new AttendancerecordDTO($id,$date,$time,'','1');
-    $ctrl->markattendance($mark_on);
-}
+    if (isset($_POST["att_id_no"])){
+        $time = date("h:i:s");
+        $date = date("Y-m-d");
+        $id=$_POST["att_id_no"];
+        $mark_on=new AttendancerecordDTO($id,$date,$time,'','1');
+        $ctrl->markattendance($mark_on);
+    }
 
-if (isset($_POST["off_id_no"])){
-    $time = date("h:i:s");
-    $id=$_POST["off_id_no"];
-    $mark_off=new AttendancerecordDTO($id,'','',$time,'');
-    $ctrl->markoff($mark_off);
-}
+    if (isset($_POST["off_id_no"])){
+        $time = date("h:i:s");
+        $id=$_POST["off_id_no"];
+        $mark_off=new AttendancerecordDTO($id,'','',$time,'');
+        $ctrl->markoff($mark_off);
+    }
 
-?>
+    ?>
 </div>
+
+
 <script>
-function displaySearchedEmployee(){
+    function displaySearchedEmployee(){
         var empid=document.getElementById("attended_id").value;
         xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function(){
@@ -116,12 +116,16 @@ function displaySearchedEmployee(){
 </script>
 
 <?php
-$facade=new FacadeInvoker();
-$display=$facade->getSO();
-//echo $display;
+    $facade=new FacadeInvoker();
+    $display=$facade->getSO();
+    //echo $display;
 ?>
+
+
 <?php
-include "../includes/footerpart.php";
+    include "../includes/footerpart.php";
 ?>
+
+
 </body>
 </html>
