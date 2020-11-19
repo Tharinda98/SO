@@ -1,7 +1,7 @@
 <?php
 
 ?>
-<footer style=" position:absolute;bottom:0;height:10%;width:100%;background-color:#006666;color:white">
+<footer style="position:bottom;height:70px;width:100%;background-color:#006666;color:white">
 <div>
 
 <p align="center">

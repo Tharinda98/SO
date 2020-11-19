@@ -2,7 +2,7 @@
 include '../includes/class-autoload.inc.php';
 
 //show employee deatils when typing a id
-//if ($_GET['empid']!=""){
+if (isset($_GET['empid'])){
     $factory=new ControllerFactory();
     $ctrl = $factory->getController("SO");
     $result=$ctrl->displayEmployeeById($_GET['empid']);
@@ -28,5 +28,15 @@ include '../includes/class-autoload.inc.php';
             Designation:<br>
             </div>";    
     }
-//}
+}
+    if(isset($_GET['national_id'])){
+        
+        echo"<div id=\"DisplayVisitors\">
+        <form action=\"so.view.php\" method=\"POST\">
+            <input name=\"visitor_n_id\" value=\"{$_GET['national_id']}\" readonly>
+            <button class=\"btn btn-dark\" type=\"submit\" onclick=\"reload()\"> Mark OFF </button>
+            <form>
+            </div>";
+    }
+
 ?>

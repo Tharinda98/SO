@@ -4,13 +4,13 @@
  ?>
 
  	<header style="background-color:#006666;color:white">
-		<div>
+		<div style="display: grid;grid-template-columns: auto auto auto;height:5%;padding: 1px;">
 
 			<div style=" float:left">
 				<img src="../includes/sltb_logo.jpg" width="80" height="45">
 			</div>
 
-			<div>
+			<div style="text-align:center">
 				<h3>Welcome <?php echo($_SESSION['designation']) ; ?>
 				<h3>
 			</div>

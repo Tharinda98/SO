@@ -5,9 +5,10 @@ include '../includes/class-autoload.inc.php';
 if (($_GET['compid']!="")&($_GET['task']=="selectRecord")){
     $factory=new ControllerFactory();
     $ctrl = $factory->getController("ENGINEER");
+    //$complain_obj=new ComplainDTO($_GET['compid'],'','','','');
     $result=$ctrl->displayComplainById($_GET['compid']);
 
-    echo "<div id=\"outForm\">
+   /* echo "<div id=\"outForm\">
         <form>
            <input type=\"text\" id=\"selected complain\" value=\"{$result[0]['compid']}\">
            </form>
@@ -16,7 +17,13 @@ if (($_GET['compid']!="")&($_GET['task']=="selectRecord")){
            description:{$result[0]['description']}<br>
            date:{$result[0]['date']}<br>
            state:{$result[0]['state']}<br>
-           </div>";
+           </div>"; */
+    echo "<div id=\"outForm\">
+            <form>
+                <input type=\"text\" id=\"selected complain\" value=\"{$result[0]['compid']}\">
+                <input type=\"text\" id=\"selected bus\" value=\"{$result[0]['Numplate']}\">
+            </form>
+            </div>";      
 }
 
 //adding a worker to the complain

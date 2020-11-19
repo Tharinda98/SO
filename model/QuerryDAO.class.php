@@ -36,7 +36,7 @@ class QuerryDAO implements SuperDAO{
     }
     //get complains which are only created
     public function getComplains(){
-        $sql= "SELECT complain.compid, bus.Numplate, complain.description, complain.date, complain.state FROM complain INNER JOIN dutyrecord ON complain.dutyid=dutyrecord.dutyid INNER JOIN bus ON dutyrecord.busid=bus.busid WHERE complain.state='created'";
+        $sql= "SELECT complain.compid, bus.Numplate, complain.description, complain.date, complain.state FROM complain INNER JOIN dutyrecord ON complain.dutyid=dutyrecord.dutyid INNER JOIN bus ON dutyrecord.busid=bus.busid WHERE complain.state='created'ORDER BY complain.compid";
         $stmt=$this->dbconnection->connect()->prepare($sql);
         $stmt->execute();
 
@@ -98,7 +98,7 @@ class QuerryDAO implements SuperDAO{
     }
     //get the complians which are in processed state
     public function getWorkerAddedComplain(){
-        $sql = "SELECT complain.compid,bus.Numplate,complain.description,complain.date,complain.state,.workerassign.empid FROM complain INNER JOIN workerassign on complain.compid=workerassign.compid INNER JOIN dutyrecord on complain.dutyid=dutyrecord.dutyid INNER JOIN bus on dutyrecord.busid=bus.busid WHERE complain.state='processed' ORDER BY complain.compid";
+        $sql = "SELECT complain.compid,bus.Numplate,complain.description,complain.date,complain.state,.workerassign.empid,employee.FirstName FROM complain INNER JOIN workerassign on complain.compid=workerassign.compid INNER JOIN dutyrecord on complain.dutyid=dutyrecord.dutyid INNER JOIN bus on dutyrecord.busid=bus.busid INNER JOIN employee on workerassign.empid=employee.empid WHERE complain.state='processed'   ORDER BY complain.compid";
         $stmt = $this->dbconnection->connect()->prepare($sql);
         $stmt->execute();
         $results=$stmt->fetchAll();
@@ -154,6 +154,15 @@ class QuerryDAO implements SuperDAO{
             $stmt2->execute([$result['busid']]);
         }
 
+    }
+
+    //get details of a complain by id
+    public function giveComplainDetails($compid){
+        $sql="SELECT complain.compid,dutyrecord.dutyid,bus.busid,bus.Numplate FROM complain INNER JOIN dutyrecord ON complain.dutyid=dutyrecord.dutyid INNER JOIN bus ON dutyrecord.busid=bus.busid WHERE complain.compid=?";
+        $stmt = $this->dbconnection->connect()->prepare($sql);
+        $stmt->execute([$compid]);
+        $results=$stmt->fetchAll();
+        return $results;
     }
 
     

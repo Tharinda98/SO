@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 class AttendancerecordDAO implements CrudDAO{
     private $dbconnection;
     public function __construct(){
